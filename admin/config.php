@@ -3,7 +3,7 @@ $APP['database'] = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'name' => 'web2'
+    'name' => 'php-mini-task'
 ];
 
 $APP['connections'] = [];
