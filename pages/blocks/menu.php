@@ -1,1 +1,1 @@
-<a href="?module=students&action=list">List of students</a>
+<a href="?module=books&action=list">List of Books</a>
