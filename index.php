@@ -16,9 +16,9 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     );
 }
 if ($_GET['module'] === 'auth' && $_GET['action'] === 'logout') {
-    unset($_SESSION);
+    unset($_SESSION['authorized']);
+    session_destroy();
 }
-
 ?>
 
 <!doctype html>
