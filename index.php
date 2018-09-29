@@ -10,6 +10,12 @@ function getAuthorsString ($authors) {
     });
     return $authorsString;
 }
+
+function dbQuery($query) {
+    global $APP;
+    $result = mysqli_query($APP['connections']['default'], $query);
+    return $result;
+}
 ?>
 
 <?
