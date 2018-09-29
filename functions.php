@@ -24,3 +24,4 @@ function dbSelect($query){
     }
     return $list;
 }
+

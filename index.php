@@ -3,6 +3,13 @@ session_start();
 require_once 'admin/config.php';
 require_once 'admin/functions.php';
 dbConnect();
+
+function getAuthorsString ($authors) {
+    $authorsString = array_reduce($authors, function($carry, $item) {
+        return $item . ", " . $carry ;
+    });
+    return $authorsString;
+}
 ?>
 
 <?

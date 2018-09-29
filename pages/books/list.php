@@ -1,6 +1,6 @@
 <?php
 $queryString = "
-    SELECT Author.name as authorName, Book.title as bookTitle FROM Book_Author
+    SELECT Book.id, Author.name as authorName, Book.title as bookTitle FROM Book_Author
 INNER JOIN Author on Author.id = Book_Author.author_id
 INNER JOIN Book on Book.id = Book_Author.book_id
 ";
@@ -10,21 +10,14 @@ $booksGrouped = [];
 // Best spaghetti in the town!
 
 foreach ($books as $book) {
-    $bookTitle = $book["bookTitle"];
-    if(!$booksGrouped[ $bookTitle]) {
-        $booksGrouped[ $bookTitle] = [];
+    $bookId = $book["id"];
+    if(!$booksGrouped[$bookId]) {
+        $booksGrouped[$bookId]["title"] = $book["bookTitle"];
+        $booksGrouped[$bookId]["authors"] = [];
     }
-    array_push($booksGrouped[$bookTitle], $book["authorName"]);
+    array_push($booksGrouped[$bookId]["authors"], $book["authorName"]);
 }
 
-//var_dump($booksGrouped);
-
-    function getAuthorsString ($authors) {
-        $authorsString = array_reduce($authors, function($carry, $item) {
-            return $item . ", " . $carry ;
-        });
-        return $authorsString;
-    }
 ?>
 
 
@@ -38,11 +31,16 @@ foreach ($books as $book) {
         </thead>
         <tbody>
         <? foreach ($booksGrouped as $key => $book) {
-            $authorsString = getAuthorsString($book);
+            $id = $key;
+            $title = $book["title"];
+            $authorsString = getAuthorsString($book["authors"]);
             ?>
             <tr>
-                <td><?=$key;?></td>
+                <td><?=$title;?></td>
                 <td><?=$authorsString;?></td>
+                <? if($_SESSION["authorized"]) { ?>
+                <td><a href="?module=books&action=edit&bookId=<?=$id?>">Edit</a></td>
+                <?}?>
             </tr>
         <? }?>
         </tbody>
