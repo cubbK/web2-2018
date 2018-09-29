@@ -48,3 +48,5 @@ foreach ($books as $book) {
 <? }else{?>
     <strong>No records</strong>
 <? }?>
+
+<a href="?module=books&action=new">Add book</a>
